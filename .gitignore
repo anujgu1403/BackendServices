@@ -1,6 +1,10 @@
+# Gradle
 .gradle/
 build/
+
+# IntelliJ IDEA
 .idea/
 *.iml
-.DS_Store
 
+# OS
+.DS_Store
