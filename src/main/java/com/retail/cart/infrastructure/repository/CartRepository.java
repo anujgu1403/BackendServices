@@ -1,7 +1,7 @@
-package com.retail.checkout.infrastructure.repository;
+package com.retail.cart.infrastructure.repository;
 
-import com.retail.checkout.domain.model.CartModel;
-import com.retail.checkout.domain.model.CartItemModel;
+import com.retail.cart.domain.model.CartModel;
+import com.retail.cart.domain.model.CartItemModel;
 
 import java.util.List;
 

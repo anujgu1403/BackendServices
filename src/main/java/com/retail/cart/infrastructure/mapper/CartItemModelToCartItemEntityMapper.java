@@ -1,7 +1,7 @@
-package com.retail.checkout.infrastructure.mapper;
+package com.retail.cart.infrastructure.mapper;
 
-import com.retail.checkout.domain.model.CartItemModel;
-import com.retail.checkout.infrastructure.entity.CartItemEntity;
+import com.retail.cart.domain.model.CartItemModel;
+import com.retail.cart.infrastructure.entity.CartItemEntity;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package com.retail.checkout.infrastructure.entity;
+package com.retail.cart.infrastructure.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

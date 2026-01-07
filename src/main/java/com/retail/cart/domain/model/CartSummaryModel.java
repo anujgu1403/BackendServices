@@ -1,4 +1,4 @@
-package com.retail.checkout.domain.model;
+package com.retail.cart.domain.model;
 
 import lombok.*;
 

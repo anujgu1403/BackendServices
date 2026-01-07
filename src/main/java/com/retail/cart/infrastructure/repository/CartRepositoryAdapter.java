@@ -1,13 +1,13 @@
-package com.retail.checkout.infrastructure.repository;
+package com.retail.cart.infrastructure.repository;
 
-import com.retail.checkout.domain.model.CartItemModel;
-import com.retail.checkout.domain.model.CartModel;
-import com.retail.checkout.infrastructure.entity.CartEntity;
-import com.retail.checkout.infrastructure.entity.CartItemEntity;
-import com.retail.checkout.infrastructure.mapper.CartEntityToCartModelMapper;
-import com.retail.checkout.infrastructure.mapper.CartItemEntityToCartItemModelMapper;
-import com.retail.checkout.infrastructure.mapper.CartItemModelToCartItemEntityMapper;
-import com.retail.checkout.infrastructure.mapper.CartModelToCartEntityMapper;
+import com.retail.cart.domain.model.CartItemModel;
+import com.retail.cart.domain.model.CartModel;
+import com.retail.cart.infrastructure.entity.CartEntity;
+import com.retail.cart.infrastructure.entity.CartItemEntity;
+import com.retail.cart.infrastructure.mapper.CartEntityToCartModelMapper;
+import com.retail.cart.infrastructure.mapper.CartItemEntityToCartItemModelMapper;
+import com.retail.cart.infrastructure.mapper.CartItemModelToCartItemEntityMapper;
+import com.retail.cart.infrastructure.mapper.CartModelToCartEntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

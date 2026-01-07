@@ -1,4 +1,4 @@
-package com.retail.checkout.domain.operation;
+package com.retail.cart.domain.operation;
 
 public final class CartTotalsOperations {
 

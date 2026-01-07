@@ -1,7 +1,7 @@
-package com.retail.checkout.application.service;
+package com.retail.cart.application.service;
 
-import com.retail.checkout.application.model.Cart;
-import com.retail.checkout.application.model.CartItem;
+import com.retail.cart.application.model.Cart;
+import com.retail.cart.application.model.CartItem;
 
 import java.util.List;
 

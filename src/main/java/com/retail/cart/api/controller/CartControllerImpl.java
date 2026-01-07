@@ -1,8 +1,8 @@
-package com.retail.checkout.api.controller;
+package com.retail.cart.api.controller;
 
-import com.retail.checkout.application.model.Cart;
-import com.retail.checkout.application.model.CartItem;
-import com.retail.checkout.application.service.CartService;
+import com.retail.cart.application.model.Cart;
+import com.retail.cart.application.model.CartItem;
+import com.retail.cart.application.service.CartService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,6 @@ public class CartControllerImpl implements CartController {
 
     @Autowired
     private CartService service;
-
-    public CartControllerImpl(CartService service) { this.service = service; }
 
     public ResponseEntity<Cart> addItem(@RequestBody Cart cart) {
         return ResponseEntity.ok(service.addItem(cart));

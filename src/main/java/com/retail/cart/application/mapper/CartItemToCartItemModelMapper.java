@@ -1,7 +1,7 @@
-package com.retail.checkout.application.mapper;
+package com.retail.cart.application.mapper;
 
-import com.retail.checkout.application.model.CartItem;
-import com.retail.checkout.domain.model.CartItemModel;
+import com.retail.cart.application.model.CartItem;
+import com.retail.cart.domain.model.CartItemModel;
 import org.springframework.stereotype.Component;
 
 @Component
