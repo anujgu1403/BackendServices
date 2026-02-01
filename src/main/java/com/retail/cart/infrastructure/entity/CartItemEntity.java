@@ -30,8 +30,17 @@ public class CartItemEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, name ="product_id")
+    private Long productId;
+
     @Column(nullable = false)
-    private Long itemId;
+    private String name;
+
+    @Column(nullable = false)
+    private String description;
+
+    @Column(nullable = false)
+    private String image_url;
 
     @Column(nullable = false, precision = 18, scale = 2)
     private BigDecimal unitPrice;

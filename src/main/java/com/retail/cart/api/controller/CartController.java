@@ -5,12 +5,13 @@ import com.retail.cart.application.model.CartItem;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 public interface CartController {
     @PostMapping("add")
-    ResponseEntity<Cart> addItem(@RequestBody Cart cart);
+    ResponseEntity<Mono<Cart>> addItem(@RequestBody Cart cart);
 
     @DeleteMapping("/{cartId}/items/{cartItemId}")
     ResponseEntity<Integer> deleteItem(@PathVariable Long cartId, @PathVariable Long cartItemId);

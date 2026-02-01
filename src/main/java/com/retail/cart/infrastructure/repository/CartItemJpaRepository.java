@@ -12,7 +12,7 @@ public interface  CartItemJpaRepository extends JpaRepository<CartItemEntity, Lo
 
     Optional<CartItemEntity> findByIdAndCartId(Long id, Long cartId);
 
-    Optional<CartItemEntity> findByCartIdAndItemId(Long cartId, Long itemId);
+    Optional<CartItemEntity> findByCartIdAndProductId(Long cartId, Long productId);
 
     int deleteByIdAndCartId(Long id, Long cartId);
 

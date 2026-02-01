@@ -9,7 +9,10 @@ public class CartItemEntityToCartItemModelMapper {
     public CartItemModel apply(CartItemEntity cartItemEntity){
        return CartItemModel.builder()
                 .cartId(cartItemEntity.getCart().getId())
-                .itemNumber(cartItemEntity.getItemId())
+                .productId(cartItemEntity.getProductId())
+                .productName(cartItemEntity.getName())
+                .description(cartItemEntity.getDescription())
+                .imageUrl(cartItemEntity.getImage_url())
                 .quantity(cartItemEntity.getQuantity())
                 .createdDate(cartItemEntity.getCreatedDate())
                 .unitPrice(cartItemEntity.getUnitPrice())

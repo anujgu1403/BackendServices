@@ -2,11 +2,12 @@ package com.retail.cart.infrastructure.repository;
 
 import com.retail.cart.domain.model.CartModel;
 import com.retail.cart.domain.model.CartItemModel;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 public interface CartRepository {
-    CartModel addItem(CartModel cartModel);
+    Mono<CartModel> addItem(CartModel cartModel);
     int deleteItem(Long cartId, Long itemId);
     CartModel getCart(Long cartId);
     int getCartItemCount(Long userId);

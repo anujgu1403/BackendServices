@@ -13,8 +13,10 @@ import java.time.LocalDateTime;
 @Builder
 public class CartItem {
     private Long cartItemId;
-    private Long cartId;
-    private Long itemNumber;
+    private Long productId;
+    private String productName;
+    private String description;
+    private String imageUrl;
     private BigDecimal unitPrice;
     private int quantity;
     private LocalDateTime createdDate;

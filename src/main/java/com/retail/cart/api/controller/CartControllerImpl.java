@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class CartControllerImpl implements CartController {
     @Autowired
     private CartService service;
 
-    public ResponseEntity<Cart> addItem(@RequestBody Cart cart) {
+    public ResponseEntity<Mono<Cart>> addItem(@RequestBody Cart cart) {
         return ResponseEntity.ok(service.addItem(cart));
     }
 

@@ -16,7 +16,10 @@ import java.time.LocalDateTime;
 @Builder
 public class CartItemModel {
     private Long cartItemId;
-    private Long itemNumber;
+    private Long productId;
+    private String productName;
+    private String description;
+    private String imageUrl;
     private BigDecimal unitPrice;
     private int quantity;
     private Long cartId;

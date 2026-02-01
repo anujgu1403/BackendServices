@@ -11,6 +11,7 @@ import com.retail.cart.infrastructure.mapper.CartModelToCartEntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Mono;
 
 @Repository
 @Transactional
@@ -40,7 +41,7 @@ public class CartRepositoryAdapter implements CartRepository {
     }
 
     @Override
-    public CartModel addItem(CartModel cartModel) {
+    public Mono<CartModel> addItem(CartModel cartModel) {
         CartEntity cartEntity;
 
         if (cartModel.getCartId() != null && cartModel.getCartId() > 0) {
@@ -53,7 +54,7 @@ public class CartRepositoryAdapter implements CartRepository {
 
         if (cartEntity != null) {
             CartItemModel itemToAdd = cartModel.getCartItemModels().getFirst();
-            CartItemEntity existing = cartItemJpaRepository.findByCartIdAndItemId(cartEntity.getId(), itemToAdd.getItemNumber()).orElse(null);
+            CartItemEntity existing = cartItemJpaRepository.findByCartIdAndProductId(cartEntity.getId(), itemToAdd.getProductId()).orElse(null);
             if (existing != null) {
                 existing.setQuantity(existing.getQuantity() + itemToAdd.getQuantity());
                 cartItemJpaRepository.save(existing);
@@ -63,14 +64,14 @@ public class CartRepositoryAdapter implements CartRepository {
                 cartEntity.getCartItems().add(cartItemEntity);
                 cartJpaRepository.save(cartEntity);
             }
-            return cartEntityToCartModelMapper.apply(cartEntity);
+            return Mono.just(cartEntityToCartModelMapper.apply(cartEntity));
         } else {
             CartEntity newCartEntity = cartModelToCartEntityMapper.apply(cartModel);
             if (newCartEntity.getCartItems() != null && !newCartEntity.getCartItems().isEmpty()) {
                 newCartEntity.getCartItems().getFirst().setCart(newCartEntity);
             }
             cartJpaRepository.save(newCartEntity);
-            return cartEntityToCartModelMapper.apply(newCartEntity);
+            return Mono.just(cartEntityToCartModelMapper.apply(newCartEntity));
         }
     }
 

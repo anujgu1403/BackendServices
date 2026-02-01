@@ -7,9 +7,13 @@ import com.retail.cart.application.model.Cart;
 import com.retail.cart.application.model.CartItem;
 import com.retail.cart.application.service.CartService;
 import com.retail.cart.domain.model.CartModel;
+import com.retail.cart.infrastructure.client.connector.CatalogConnectorImpl;
+import com.retail.cart.infrastructure.client.integrator.CatalogIntegratorImpl;
 import com.retail.cart.infrastructure.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +31,9 @@ public class CartServiceImpl implements CartService {
 
     @Autowired
     CartItemModelToCartItemMapper cartItemModelToCartItemMapper;
+
+    @Autowired
+    CatalogIntegratorImpl catalogIntegrator;
 
     @Override
     public Cart getUserCart(Long userId) {
@@ -56,9 +63,21 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart addItem(Cart cart) {
-        CartModel cartModel = cartToCartModelMapper.apply(cart);
-        return cartModelToCartMapper.apply(cartRepository.addItem(cartModel));
+    public Mono<Cart> addItem(Cart cart) {
+
+        return Mono.just(cart)
+                .map(cartToCartModelMapper::apply)
+                .flatMap(cartModel ->
+                        Flux.fromIterable(cartModel.getCartItemModels())
+                                .flatMap(catalogIntegrator::integrate)
+                                .collectList()
+                                .map(enrichedItems -> {
+                                    cartModel.setCartItemModels(enrichedItems);
+                                    return cartModel;
+                                })
+                )
+                .flatMap(cartRepository::addItem)
+                .map(cartModelToCartMapper::apply);
     }
 
     @Override

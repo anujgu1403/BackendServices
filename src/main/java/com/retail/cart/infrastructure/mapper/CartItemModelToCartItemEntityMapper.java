@@ -11,7 +11,10 @@ public class CartItemModelToCartItemEntityMapper {
     public CartItemEntity apply(CartItemModel cartItemModel) {
         return CartItemEntity.builder()
                 .id(cartItemModel.getCartItemId())
-                .itemId(cartItemModel.getItemNumber())
+                .productId(cartItemModel.getProductId())
+                .name(cartItemModel.getProductName())
+                .description(cartItemModel.getDescription())
+                .image_url(cartItemModel.getImageUrl())
                 .createdDate(LocalDateTime.now())
                 .quantity(cartItemModel.getQuantity())
                 .unitPrice(cartItemModel.getUnitPrice())
