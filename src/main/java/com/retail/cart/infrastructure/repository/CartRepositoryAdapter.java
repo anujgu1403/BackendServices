@@ -45,8 +45,10 @@ public class CartRepositoryAdapter implements CartRepository {
 
         if (cartModel.getCartId() != null && cartModel.getCartId() > 0) {
             cartEntity = cartJpaRepository.findById(cartModel.getCartId()).orElse(null);
-        } else {
+        } else if (cartModel.getUserId()!=null){
             cartEntity = cartJpaRepository.findByUserIdAndIsActive(cartModel.getUserId(), true).orElse(null);
+        } else {
+            cartEntity = null;
         }
 
         if (cartEntity != null) {

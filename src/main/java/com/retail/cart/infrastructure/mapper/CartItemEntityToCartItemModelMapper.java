@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class CartItemEntityToCartItemModelMapper {
     public CartItemModel apply(CartItemEntity cartItemEntity){
        return CartItemModel.builder()
-                .cartId(cartItemEntity.getId())
+                .cartId(cartItemEntity.getCart().getId())
                 .itemNumber(cartItemEntity.getItemId())
                 .quantity(cartItemEntity.getQuantity())
                 .createdDate(cartItemEntity.getCreatedDate())
