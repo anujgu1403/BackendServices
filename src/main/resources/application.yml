@@ -33,3 +33,6 @@ springdoc:
 catalog:
   service:
     url: http://localhost:8081/api/catalog
+    connectiontimeout: 2000
+    readtimeout: 3000
+    retry: 3
