@@ -51,6 +51,9 @@ public class CartItemEntity {
     @Column(nullable = false)
     private LocalDateTime createdDate;
 
+    @Column
+    private LocalDateTime updatedDate;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id")
     private CartEntity cart;

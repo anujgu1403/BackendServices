@@ -15,6 +15,7 @@ public class CartItemEntityToCartItemModelMapper {
                 .imageUrl(cartItemEntity.getImage_url())
                 .quantity(cartItemEntity.getQuantity())
                 .createdDate(cartItemEntity.getCreatedDate())
+                .updatedDate(cartItemEntity.getUpdatedDate())
                 .unitPrice(cartItemEntity.getUnitPrice())
                 .cartItemId(cartItemEntity.getId())
                 .build();

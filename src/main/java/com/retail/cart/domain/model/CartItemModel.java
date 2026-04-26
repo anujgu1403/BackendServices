@@ -24,4 +24,5 @@ public class CartItemModel {
     private int quantity;
     private Long cartId;
     private LocalDateTime createdDate;
+    private LocalDateTime updatedDate;
 }

@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
+
 @Repository
 @Transactional
 public class CartRepositoryAdapter implements CartRepository {
@@ -58,6 +60,7 @@ public class CartRepositoryAdapter implements CartRepository {
                         CartItemEntity existing = cartItemJpaRepository.findByCartIdAndProductId(cartEntity.getId(), itemToAdd.getProductId()).orElse(null);
                         if (existing != null) {
                             existing.setQuantity(existing.getQuantity() + itemToAdd.getQuantity());
+                            existing.setUpdatedDate(LocalDateTime.now());
                             cartItemJpaRepository.save(existing);
                         } else {
                             CartItemEntity cartItemEntity = cartItemModelToCartItemEntityMapper.apply(itemToAdd);
@@ -128,6 +131,7 @@ public class CartRepositoryAdapter implements CartRepository {
         return cartItemJpaRepository.findByIdAndCartId(cartItemId, cartId)
                 .map(cartItemEntity -> {
                     cartItemEntity.setQuantity(cartItemEntity.getQuantity() + quantity);
+                    cartItemEntity.setUpdatedDate(LocalDateTime.now());
                     cartItemJpaRepository.save(cartItemEntity);
                     return 1;
                 })

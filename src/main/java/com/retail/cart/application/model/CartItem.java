@@ -20,4 +20,5 @@ public class CartItem {
     private BigDecimal unitPrice;
     private int quantity;
     private LocalDateTime createdDate;
+    private LocalDateTime updatedDate;
 }
