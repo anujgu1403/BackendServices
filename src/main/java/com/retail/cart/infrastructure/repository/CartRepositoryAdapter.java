@@ -53,22 +53,26 @@ public class CartRepositoryAdapter implements CartRepository {
         }
 
         if (cartEntity != null) {
-            CartItemModel itemToAdd = cartModel.getCartItemModels().getFirst();
-            CartItemEntity existing = cartItemJpaRepository.findByCartIdAndProductId(cartEntity.getId(), itemToAdd.getProductId()).orElse(null);
-            if (existing != null) {
-                existing.setQuantity(existing.getQuantity() + itemToAdd.getQuantity());
-                cartItemJpaRepository.save(existing);
-            } else {
-                CartItemEntity cartItemEntity = cartItemModelToCartItemEntityMapper.apply(itemToAdd);
-                cartItemEntity.setCart(cartEntity);
-                cartEntity.getCartItems().add(cartItemEntity);
-                cartJpaRepository.save(cartEntity);
-            }
+           cartModel.getCartItemModels()
+                    .forEach(itemToAdd -> {
+                        CartItemEntity existing = cartItemJpaRepository.findByCartIdAndProductId(cartEntity.getId(), itemToAdd.getProductId()).orElse(null);
+                        if (existing != null) {
+                            existing.setQuantity(existing.getQuantity() + itemToAdd.getQuantity());
+                            cartItemJpaRepository.save(existing);
+                        } else {
+                            CartItemEntity cartItemEntity = cartItemModelToCartItemEntityMapper.apply(itemToAdd);
+                            cartItemEntity.setCart(cartEntity);
+                            cartEntity.getCartItems().add(cartItemEntity);
+                            cartJpaRepository.save(cartEntity);
+                        }
+                    });
+
             return Mono.just(cartEntityToCartModelMapper.apply(cartEntity));
         } else {
             CartEntity newCartEntity = cartModelToCartEntityMapper.apply(cartModel);
             if (newCartEntity.getCartItems() != null && !newCartEntity.getCartItems().isEmpty()) {
-                newCartEntity.getCartItems().getFirst().setCart(newCartEntity);
+                newCartEntity.getCartItems()
+                        .forEach(itemEntity -> itemEntity.setCart(newCartEntity));
             }
             cartJpaRepository.save(newCartEntity);
             return Mono.just(cartEntityToCartModelMapper.apply(newCartEntity));

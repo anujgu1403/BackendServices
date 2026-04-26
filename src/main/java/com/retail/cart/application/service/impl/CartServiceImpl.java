@@ -6,8 +6,6 @@ import com.retail.cart.application.mapper.CartToCartModelMapper;
 import com.retail.cart.application.model.Cart;
 import com.retail.cart.application.model.CartItem;
 import com.retail.cart.application.service.CartService;
-import com.retail.cart.domain.model.CartModel;
-import com.retail.cart.infrastructure.client.connector.CatalogConnectorImpl;
 import com.retail.cart.infrastructure.client.integrator.CatalogIntegratorImpl;
 import com.retail.cart.infrastructure.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -33,6 +33,31 @@ springdoc:
 catalog:
   service:
     url: http://localhost:8081/api/catalog
-    connectiontimeout: 2000
-    readtimeout: 3000
-    retry: 3
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        minimumNumberOfCalls: 3
+        failureRateThreshold: 40
+        waitDurationInOpenState: 5s
+        slidingWindowSize: 10
+        slidingWindowType: TIME_BASED
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+
+    instances:
+      catalogService:
+        baseConfig: default
+        minimumNumberOfCalls: 12
+        permittedNumberOfCallsInHalfOpenState: 12
+
+  retry:
+    instances:
+      catalogService:
+        maxAttempts: 3
+        waitDuration: 1
+        retryExceptions:
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
